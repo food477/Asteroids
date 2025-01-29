@@ -2,12 +2,18 @@
 # the open-source pygame library
 # throughout this file
 import pygame
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 from constants import *
 from player import *
 
+asteroids = pygame.sprite.Group()
 updatable = pygame.sprite.Group()
 drawable = pygame.sprite.Group()
+
+AsteroidField.containers = (updatable)
 Player.containers = (updatable, drawable)
+Asteroid.containers = (asteroids, updatable, drawable)
 
 def main():
     pygame.init()
@@ -15,7 +21,7 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
-
+    asteroid_field = AsteroidField()
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
@@ -26,6 +32,7 @@ def main():
                 return
         updatable.update(dt)      
         screen.fill((0,0,0))
+
         for sprite in drawable:
             sprite.draw(screen)
         pygame.display.flip()
