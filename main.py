@@ -47,7 +47,7 @@ def main():
             for shot in shots:
                 col = asteroid.col_check(shot)
                 if col:
-                    asteroid.kill()
+                    asteroid.split()
                     shot.kill()
 
 
